@@ -28,14 +28,8 @@ async function conecta(query) {
 var arquivosSql = [];
 
 async function leArquivosSql() {
-  await fs.readdir(dir + '/sql', (err, data) => {
-    if (err) return console.log(err);
-
-    data.forEach(a => {
-      arquivosSql.push(a)
-      execSql('./sql/' + a);
-    })
-  });
+  var dirSql = fs.readdirSync('./sql');
+    dirSql.forEach(d => execSql(d));
 }
 
 async function leArquivosCsv() {
@@ -63,11 +57,15 @@ async function leArquivosCsv() {
         let f = formatoSplit[j];
 
         if (f == 'date' || f == 'time' || f == 'varchar(255)') {
+          if (s == '""')
+              s = '#NULO#'
           query += `'${s.toString().replace(/"/g, '').replace(/,/g, '.')}'`
         }
-        else
+        else {
+          if (s == '""')
+              s = '0'        
           query += `${s.toString().replace(/"/g, '').replace(/,/g, '.')}`
-
+        }
         j++;
 
         if (j < tamanho)
