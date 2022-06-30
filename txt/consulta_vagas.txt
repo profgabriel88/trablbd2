@@ -1,0 +1,15 @@
+date
+time
+integer
+integer
+varchar(255)
+integer
+varchar(255)
+date
+date
+varchar(255)
+varchar(255)
+varchar(255)
+integer
+varchar(255)
+integer

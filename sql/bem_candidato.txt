@@ -1,0 +1,21 @@
+create table if not exists bem_candidato (
+    dt_geracao date,
+    hh_geracao time,
+    ano_eleicao integer,
+    cd_tipo_eleicao integer,
+    nm_tipo_eleicao varchar,
+    cd_eleicao integer,
+    ds_eleicao varchar,
+    dt_eleicao date,
+    sg_uf varchar,
+    sg_ue varchar,
+    nm_ue varchar,
+    sq_candidato varchar,
+    nr_ordem_candidato integer,
+    cd_tipo_bem_candidato integer,
+    ds_tipo_bem_candidato varchar,
+    ds_bem_candidato varchar,
+    vr_bem_candidato money,
+    dt_ultima_atualizacao date,
+    hh_ultima_atualizacao time
+)

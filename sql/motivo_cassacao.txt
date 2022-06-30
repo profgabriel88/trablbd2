@@ -1,0 +1,14 @@
+create table if not exists motivo_cassacao(
+    dt_geracao date,
+    hh_geracao time,
+    ano_eleicao integer,
+    cd_tipo_eleicao integer,
+    nm_tipo_eleicao varchar,
+    cd_eleicao integer,
+    ds_eleicao varchar,
+    sg_uf varchar,
+    sg_ue varchar,
+    nm_ue varchar,
+    sq_candidato varchar,
+    ds_motivo_cassacao varchar
+)

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "pg": "^8.7.3"
+  },
+  "main": "popula.js",
+  "scripts": {
+    "start": "node popula.js"
+  }
+}

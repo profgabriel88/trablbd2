@@ -1,0 +1,18 @@
+create table if not exists consulta_vagas(
+    dt_geracao date,
+    hh_geracao time,
+    ano_eleicao integer,
+    cd_tipo_eleicao integer,
+    nm_tipo_eleicao varchar,
+    cd_eleicao integer,
+    ds_eleicao varchar,
+    dt_eleicao date,
+    dt_posse date,
+    sg_uf varchar,
+    sg_ue varchar,
+    nm_ue varchar,
+    cd_cargo integer,
+    ds_cargo varchar,
+    qt_vagas integer
+
+)
