@@ -101,5 +101,5 @@ function exec(caminho) {
   conecta(arqSql.toString());
 }
 
-// leArquivosSql();
+//leArquivosSql();
 leArquivosCsv();

@@ -1,0 +1,12 @@
+select sg_partido, count(*) as cand from consulta_cand group by sg_partido order by cand desc limit 1;
+
+select ds_genero, count(*) as genero from consulta_cand group by ds_genero;
+
+select ds_cor_raca, count(*) as cor from consulta_cand group by ds_cor_raca order by cor desc;
+
+select nm_candidato, nr_idade_data_posse from consulta_cand 
+order by nr_idade_data_posse desc, nm_candidato asc limit 10;
+
+select ds_bem_candidato, vr_bem_candidato from bem_candidato order by vr_bem_candidato desc limit 10;
+
+select sq_candidato, count(sq_candidato) as bens from bem_candidato group by sq_candidato order by bens desc limit 1;
