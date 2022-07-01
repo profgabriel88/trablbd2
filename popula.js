@@ -12,10 +12,12 @@ pgClient.connect();
 
 const log = console.log;
 
-async function conecta(query) {
+async function conecta(query, tabela, conta) {
 
   try {
     var result = await pgClient.query(query);
+    console.log(tabela + ' ' + conta);      
+
   }
   catch (err) {
     console.log(query);
@@ -33,7 +35,7 @@ async function leArquivosSql() {
 }
 
 async function leArquivosCsv() {
-  var dirCsv = ['bem_candidato', 'consulta_coligacao', 'consulta_vagas', 'motivo_cassacao'];
+  var dirCsv = ['bem_candidato', 'consulta_cand', 'consulta_coligacao', 'consulta_vagas', 'motivo_cassacao'];
   for (let k = 0; k < dirCsv.length; k++) {
     var conta = 0;  
 
@@ -56,9 +58,13 @@ async function leArquivosCsv() {
       splites.forEach((s) => {
         let f = formatoSplit[j];
 
-        if (f == 'date' || f == 'time' || f == 'varchar(255)') {
-          if (s == '""')
+        if (f == 'date' || f == 'time' || f == 'varchar') {
+          if (s == '""' && f == 'varchar')
               s = '#NULO#'
+          else if (s == '""' && f == 'date')
+              s = '01/01/2001'
+          else if (s == '""' && f == 'time')
+              s = '00:00:00'
           query += `'${s.toString().replace(/"/g, '').replace(/,/g, '.')}'`
         }
         else {
@@ -76,26 +82,24 @@ async function leArquivosCsv() {
 
       query += ')';
       conta++;
-      conecta(query);
+      conecta(query, dirCsv[k], conta);
     })
     log(conta);
   }
 }
 
-async function execSql(caminho) {
-
-  fs.readFile(caminho, (err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    var linha = data.toString().split(/\r?\n/);
-
-    // console.log(linha[0].toString());      
-    conecta(data.toString());
-
-  });
+function leArquivosSql() {
+  var dirSql = fs.readdirSync('./sql');
+  dirSql.forEach(d => exec(d));
 }
 
-//leArquivosSql();
+function exec(caminho) {
+  var arqSql = fs.readFileSync('./sql/'+caminho);
+  // var linha = arqSql.toString().split(/\r?\n/);
+  // log(linha);
+
+  conecta(arqSql.toString());
+}
+
+// leArquivosSql();
 leArquivosCsv();
